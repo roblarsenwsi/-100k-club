@@ -17,9 +17,9 @@ function main(argv) {
 
 function escapeHtml(value) {
   return value.toString().
-    replace('<', '&lt;').
-    replace('>', '&gt;').
-    replace('"', '&quot;');
+    replace('<', '<').
+    replace('>', '>').
+    replace('"', '"');
 }
 
 function createServlet(Class) {
@@ -156,7 +156,7 @@ StaticServlet.prototype.sendRedirect_ = function(req, res, redirectUrl) {
   res.write('<title>301 Moved Permanently</title>\n');
   res.write('<h1>Moved Permanently</h1>');
   res.write(
-    '<p>The document has moved <a href="' +
+    '<p>The document has moved <a href="../' +
     redirectUrl +
     '">here</a>.</p>'
   );
@@ -231,7 +231,7 @@ StaticServlet.prototype.writeDirectoryIndex_ = function(req, res, path, files) {
   res.write('<ol>');
   files.forEach(function(fileName) {
     if (fileName.charAt(0) !== '.') {
-      res.write('<li><a href="' +
+      res.write('<li><a href="../' +
         escapeHtml(fileName) + '">' +
         escapeHtml(fileName) + '</a></li>');
     }
